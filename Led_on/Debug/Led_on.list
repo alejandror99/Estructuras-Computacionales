@@ -1,0 +1,79 @@
+
+Led_on.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000038  08000000  08000000  00010000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  20000000  08000038  00020000  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  20000000  08000038  00020000  2**0
+                  ALLOC
+  3 .ARM.attributes 00000021  00000000  00000000  00020000  2**0
+                  CONTENTS, READONLY
+  4 .debug_line   0000004c  00000000  00000000  00020021  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000026  00000000  00000000  0002006d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000014  00000000  00000000  00020093  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_aranges 00000020  00000000  00000000  000200a8  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000051  00000000  00000000  000200c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+08000000 <_start-0x8>:
+ 8000000:	20018000 	.word	0x20018000
+ 8000004:	08000009 	.word	0x08000009
+
+08000008 <_start>:
+// Main code starts from here
+///////////////////////////////////////////////////////////////////////////////
+
+_start:
+	// Enable GPIOA Peripheral Clock (bit 0 in AHB2ENR register)
+	ldr r6, = RCC_AHB2ENR       // Load peripheral clock reg address to r6
+ 8000008:	4e09      	ldr	r6, [pc, #36]	; (8000030 <loop+0x6>)
+	ldr r5, [r6]                // Read its content to r5
+ 800000a:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x00000001          // Set bit 0 to enable GPIOA clock
+ 800000c:	f045 0501 	orr.w	r5, r5, #1
+	str r5, [r6]                // Store result in peripheral clock register
+ 8000010:	6035      	str	r5, [r6, #0]
+
+	// Make GPIOA Pin5 as output pin (bits 1:0 in MODER register)
+	ldr r6, = GPIOA_MODER       // Load GPIOA MODER register address to r6
+ 8000012:	f04f 4690 	mov.w	r6, #1207959552	; 0x48000000
+	ldr r5, [r6]                // Read its content to r5
+ 8000016:	6835      	ldr	r5, [r6, #0]
+	and r5, 0xABFFFFFF          // Clear bits 11, 10 for P5
+ 8000018:	f025 45a8 	bic.w	r5, r5, #1409286144	; 0x54000000
+	and r5, 0xFFFFF7FF          // Write 01 to bits 11, 10 for P5
+ 800001c:	f425 6500 	bic.w	r5, r5, #2048	; 0x800
+	str r5, [r6]                // Store result in GPIOA MODER register
+ 8000020:	6035      	str	r5, [r6, #0]
+
+
+	ldr r6, = GPIOA_ODR         // Load GPIOA output data register
+ 8000022:	4e04      	ldr	r6, [pc, #16]	; (8000034 <loop+0xa>)
+	ldr r5, = 0x0020                // Read its content to r5
+ 8000024:	f04f 0520 	mov.w	r5, #32
+	str r5, [r6]                // Store result in GPIOA output data register
+ 8000028:	6035      	str	r5, [r6, #0]
+
+0800002a <loop>:
+	// Read GPIOC Pin13
+
+
+loop:
+	nop                         // No operation. Do nothing.
+ 800002a:	bf00      	nop
+	b loop                      // Jump to loop
+ 800002c:	e7fd      	b.n	800002a <loop>
+ 800002e:	0000      	.short	0x0000
+	ldr r6, = RCC_AHB2ENR       // Load peripheral clock reg address to r6
+ 8000030:	4002104c 	.word	0x4002104c
+	ldr r6, = GPIOA_ODR         // Load GPIOA output data register
+ 8000034:	48000014 	.word	0x48000014
