@@ -1,0 +1,66 @@
+
+boton_led.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000030  08000000  08000000  00010000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  20000000  08000030  00020000  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  20000000  08000030  00020000  2**0
+                  ALLOC
+  3 .ARM.attributes 00000021  00000000  00000000  00020000  2**0
+                  CONTENTS, READONLY
+  4 .debug_line   0000004a  00000000  00000000  00020021  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000026  00000000  00000000  0002006b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000014  00000000  00000000  00020091  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_aranges 00000020  00000000  00000000  000200a8  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000054  00000000  00000000  000200c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+08000000 <_start-0x8>:
+ 8000000:	20018000 	.word	0x20018000
+ 8000004:	08000009 	.word	0x08000009
+
+08000008 <_start>:
+///////////////////////////////////////////////////////////////////////////////
+// Main code starts from here
+///////////////////////////////////////////////////////////////////////////////
+_start:
+
+ldr r1, =RCC_AHB2ENR
+ 8000008:	4907      	ldr	r1, [pc, #28]	; (8000028 <_start+0x20>)
+ldr r0, [r1]
+ 800000a:	6808      	ldr	r0, [r1, #0]
+orr r0, 0x00000001 // Put here the value obtained
+ 800000c:	f040 0001 	orr.w	r0, r0, #1
+str r0, [r1]			 // Set GPIOAEN bit in RCC_APB2ENR to 1 to enable GPIOA
+ 8000010:	6008      	str	r0, [r1, #0]
+
+ldr r0, =GPIOA_MODER // Pseudo instruction
+ 8000012:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ldr r1, [r0] // Not a pseudo instruction
+ 8000016:	6801      	ldr	r1, [r0, #0]
+and r1,0xFFFFF7FF //r1 = r1 + r2
+ 8000018:	f421 6100 	bic.w	r1, r1, #2048	; 0x800
+str r1, [r0] //; Save rl to memory
+ 800001c:	6001      	str	r1, [r0, #0]
+
+ldr r1, =GPIOA_ODR
+ 800001e:	4903      	ldr	r1, [pc, #12]	; (800002c <_start+0x24>)
+ldr r0, [r1]
+ 8000020:	6808      	ldr	r0, [r1, #0]
+orr r0, 0xFFFFFFFF // Put here the value obtained
+ 8000022:	f040 30ff 	orr.w	r0, r0, #4294967295
+str r0, [r1]			 // Set ODR in GPIOA_ODR to 1 to set PA5 high
+ 8000026:	6008      	str	r0, [r1, #0]
+ldr r1, =RCC_AHB2ENR
+ 8000028:	4002104c 	.word	0x4002104c
+ldr r1, =GPIOA_ODR
+ 800002c:	48000014 	.word	0x48000014
