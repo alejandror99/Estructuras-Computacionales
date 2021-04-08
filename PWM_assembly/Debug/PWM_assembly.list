@@ -1,0 +1,155 @@
+
+PWM_assembly.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000090  08000000  08000000  00010000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  20000000  08000090  00020000  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  20000000  08000090  00020000  2**0
+                  ALLOC
+  3 .ARM.attributes 00000021  00000000  00000000  00020000  2**0
+                  CONTENTS, READONLY
+  4 .debug_line   0000006c  00000000  00000000  00020021  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000026  00000000  00000000  0002008d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000014  00000000  00000000  000200b3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_aranges 00000020  00000000  00000000  000200c8  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000057  00000000  00000000  000200e8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+08000000 <_main-0x8>:
+ 8000000:	20018000 	.word	0x20018000
+ 8000004:	08000009 	.word	0x08000009
+
+08000008 <_main>:
+///////////////////////////////////////////////////////////////////////////////
+// Main code starts from here
+///////////////////////////////////////////////////////////////////////////////
+_main:
+  	// Enable GPIOA and GPIOC Peripheral Clock (bit 0 and 2 in AHB2ENR register)
+	ldr r6, = RCC_AHB2ENR       // Load peripheral clock reg address to r6
+ 8000008:	4e19      	ldr	r6, [pc, #100]	; (8000070 <loop+0x2>)
+	ldr r5, [r6]                // Read its content to r5
+ 800000a:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x1		            // Set bit 0 to enable GPIOA clock
+ 800000c:	f045 0501 	orr.w	r5, r5, #1
+	str r5, [r6]                // Store result in peripheral clock register
+ 8000010:	6035      	str	r5, [r6, #0]
+
+	// Make GPIOA Pin5 as output pin (bits 1:0 in MODER register)
+	ldr r6, = GPIOA_MODER       // Load GPIOA MODER register address to r6
+ 8000012:	f04f 4690 	mov.w	r6, #1207959552	; 0x48000000
+	ldr r5, [r6]                // Read its content to r5
+ 8000016:	6835      	ldr	r5, [r6, #0]
+	and r5, 0xFFFFFBFF          // Write 10 to bits 11, 10 for P5
+ 8000018:	f425 6580 	bic.w	r5, r5, #1024	; 0x400
+	str r5, [r6]                // Store result in GPIOA MODER register
+ 800001c:	6035      	str	r5, [r6, #0]
+
+	// Make GPIOA Pin5 as alternate pin (bits 1:0 in AFRL register)
+	ldr r6, = GPIOA_AFRL        // Load GPIOA AFRL register address to r6
+ 800001e:	4e15      	ldr	r6, [pc, #84]	; (8000074 <loop+0x6>)
+	ldr r5, [r6]                // Read its content to r5
+ 8000020:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x00100000          // Write 0001 to bits 23, 22, 21, 20 for P5
+ 8000022:	f445 1580 	orr.w	r5, r5, #1048576	; 0x100000
+	str r5, [r6]                // Store result in GPIOA AFRL register
+ 8000026:	6035      	str	r5, [r6, #0]
+
+	// Enable TIMER2 Controller Clock (bit 0 in APB1ENR1 register)
+	ldr r6, = RCC_APB1ENR1      // Load peripheral clock reg address to r6
+ 8000028:	4e13      	ldr	r6, [pc, #76]	; (8000078 <loop+0xa>)
+	ldr r5, [r6]                // Read its content to r5
+ 800002a:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x1                 // Set bit 0 to enable APB1ENR1 clock
+ 800002c:	f045 0501 	orr.w	r5, r5, #1
+	str r5, [r6]                // Store result in peripheral clock register
+ 8000030:	6035      	str	r5, [r6, #0]
+
+	// Make TIMER2 prescaler register (bits 15:0 in PSC register)
+	ldr r6, = TIM2_PSC          // Load TIM2 PSC register address to r6
+ 8000032:	4e12      	ldr	r6, [pc, #72]	; (800007c <loop+0xe>)
+	ldr r5, = PRESCALER         // load 4 constant to r5 register
+ 8000034:	f04f 0504 	mov.w	r5, #4
+	          					// fCK_PSC / (PSC[15:0] + 1) = 4 MHz / n + 1 =  timer clock speed
+	str r5, [r6]                // Store result in TIM2 PSC register
+ 8000038:	6035      	str	r5, [r6, #0]
+
+	// Make TIMER2 auto-reload register (bits 31:0 in ARR register)
+	ldr r6, = TIM2_ARR          // Load TIM2 ARR register address to r6
+ 800003a:	4e11      	ldr	r6, [pc, #68]	; (8000080 <loop+0x12>)
+	ldr r5, [r6]                // Read its content to r5
+ 800003c:	6835      	ldr	r5, [r6, #0]
+	and r5, 0x50             	// Write 80 ARR = IN_interrpt/T_timer
+ 800003e:	f005 0550 	and.w	r5, r5, #80	; 0x50
+	str r5, [r6]                // Store result in TIM2 ARR register
+ 8000042:	6035      	str	r5, [r6, #0]
+
+	// Make TIMER2 capture/compare register (bits 31:0 in CCR1 register)
+	ldr r6, = TIM2_CCR1         // Load TIM2 CCR1 register address to r6
+ 8000044:	4e0f      	ldr	r6, [pc, #60]	; (8000084 <loop+0x16>)
+	ldr r5, [r6]                // Read its content to r5
+ 8000046:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x8             	// Set duty cycle
+ 8000048:	f045 0508 	orr.w	r5, r5, #8
+	str r5, [r6]                // Store result in TIM2 CCR1 register
+ 800004c:	6035      	str	r5, [r6, #0]
+
+	// Make TIMER2 capture/compare mode register (bits 31:0 in CCMR1 register)
+	ldr r6, = TIM2_CCMR1        // Load TIM2 CCMR1 register address to r6
+ 800004e:	4e0e      	ldr	r6, [pc, #56]	; (8000088 <loop+0x1a>)
+	ldr r5, [r6]                // Read its content to r5
+ 8000050:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x68             	// Set PWM mode
+ 8000052:	f045 0568 	orr.w	r5, r5, #104	; 0x68
+	str r5, [r6]                // Store result in TIM2 CCMR1 register
+ 8000056:	6035      	str	r5, [r6, #0]
+
+	// Make TIMER2 capture/compare enable register (bits 15:0 in CCER register)
+	ldr r6, = TIM2_CCER         // Load TIM2 CCER register address to r6
+ 8000058:	4e0c      	ldr	r6, [pc, #48]	; (800008c <loop+0x1e>)
+	ldr r5, [r6]                // Read its content to r5
+ 800005a:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x1             	// enable output
+ 800005c:	f045 0501 	orr.w	r5, r5, #1
+	str r5, [r6]                // Store result in TIM2 CCER register
+ 8000060:	6035      	str	r5, [r6, #0]
+
+	// Make TIMER2 enable register (bits 15:0 in CR1 register)
+	ldr r6, = TIM2_CR1          // Load TIM2 CR1 register address to r6
+ 8000062:	f04f 4680 	mov.w	r6, #1073741824	; 0x40000000
+	ldr r5, [r6]                // Read its content to r5
+ 8000066:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x1             	// Set bit 0 to enable timer
+ 8000068:	f045 0501 	orr.w	r5, r5, #1
+	str r5, [r6]                // Store result in TIM2 CR1 register
+ 800006c:	6035      	str	r5, [r6, #0]
+
+0800006e <loop>:
+
+loop:
+	b loop                      // Jump to loop
+ 800006e:	e7fe      	b.n	800006e <loop>
+	ldr r6, = RCC_AHB2ENR       // Load peripheral clock reg address to r6
+ 8000070:	4002104c 	.word	0x4002104c
+	ldr r6, = GPIOA_AFRL        // Load GPIOA AFRL register address to r6
+ 8000074:	48000020 	.word	0x48000020
+	ldr r6, = RCC_APB1ENR1      // Load peripheral clock reg address to r6
+ 8000078:	40021058 	.word	0x40021058
+	ldr r6, = TIM2_PSC          // Load TIM2 PSC register address to r6
+ 800007c:	40000028 	.word	0x40000028
+	ldr r6, = TIM2_ARR          // Load TIM2 ARR register address to r6
+ 8000080:	4000002c 	.word	0x4000002c
+	ldr r6, = TIM2_CCR1         // Load TIM2 CCR1 register address to r6
+ 8000084:	40000034 	.word	0x40000034
+	ldr r6, = TIM2_CCMR1        // Load TIM2 CCMR1 register address to r6
+ 8000088:	40000018 	.word	0x40000018
+	ldr r6, = TIM2_CCER         // Load TIM2 CCER register address to r6
+ 800008c:	40000020 	.word	0x40000020

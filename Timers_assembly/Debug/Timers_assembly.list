@@ -1,0 +1,308 @@
+
+Timers_assembly.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000024c  08000000  08000000  00010000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  20000000  0800024c  00020000  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  20000000  0800024c  00020000  2**0
+                  ALLOC
+  3 .ARM.attributes 00000021  00000000  00000000  00020000  2**0
+                  CONTENTS, READONLY
+  4 .debug_line   00000088  00000000  00000000  00020021  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000026  00000000  00000000  000200a9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000014  00000000  00000000  000200cf  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_aranges 00000020  00000000  00000000  000200e8  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    0000005a  00000000  00000000  00020108  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+08000000 <_main-0x188>:
+ 8000000:	20018000 	.word	0x20018000
+ 8000004:	08000189 	.word	0x08000189
+ 8000008:	080001e9 	.word	0x080001e9
+ 800000c:	080001e9 	.word	0x080001e9
+ 8000010:	080001e9 	.word	0x080001e9
+ 8000014:	080001e9 	.word	0x080001e9
+ 8000018:	080001e9 	.word	0x080001e9
+	...
+ 800002c:	080001f3 	.word	0x080001f3
+ 8000030:	080001f3 	.word	0x080001f3
+ 8000034:	00000000 	.word	0x00000000
+ 8000038:	080001f3 	.word	0x080001f3
+ 800003c:	080001f3 	.word	0x080001f3
+ 8000040:	080001f3 	.word	0x080001f3
+ 8000044:	080001f3 	.word	0x080001f3
+ 8000048:	080001f3 	.word	0x080001f3
+ 800004c:	080001f3 	.word	0x080001f3
+ 8000050:	080001f3 	.word	0x080001f3
+ 8000054:	080001f3 	.word	0x080001f3
+ 8000058:	080001f3 	.word	0x080001f3
+ 800005c:	080001f3 	.word	0x080001f3
+ 8000060:	080001f3 	.word	0x080001f3
+ 8000064:	080001f3 	.word	0x080001f3
+ 8000068:	080001f3 	.word	0x080001f3
+ 800006c:	080001f3 	.word	0x080001f3
+ 8000070:	080001f3 	.word	0x080001f3
+ 8000074:	080001f3 	.word	0x080001f3
+ 8000078:	080001f3 	.word	0x080001f3
+ 800007c:	080001f3 	.word	0x080001f3
+ 8000080:	080001f3 	.word	0x080001f3
+ 8000084:	080001f3 	.word	0x080001f3
+ 8000088:	080001f3 	.word	0x080001f3
+ 800008c:	080001f3 	.word	0x080001f3
+ 8000090:	080001f3 	.word	0x080001f3
+ 8000094:	080001f3 	.word	0x080001f3
+ 8000098:	080001f3 	.word	0x080001f3
+ 800009c:	080001f3 	.word	0x080001f3
+ 80000a0:	080001f3 	.word	0x080001f3
+ 80000a4:	080001f3 	.word	0x080001f3
+ 80000a8:	080001f3 	.word	0x080001f3
+ 80000ac:	080001f3 	.word	0x080001f3
+ 80000b0:	080001f3 	.word	0x080001f3
+ 80000b4:	08000223 	.word	0x08000223
+ 80000b8:	08000223 	.word	0x08000223
+ 80000bc:	08000223 	.word	0x08000223
+ 80000c0:	08000223 	.word	0x08000223
+ 80000c4:	08000223 	.word	0x08000223
+ 80000c8:	08000223 	.word	0x08000223
+ 80000cc:	08000223 	.word	0x08000223
+ 80000d0:	08000223 	.word	0x08000223
+ 80000d4:	08000223 	.word	0x08000223
+ 80000d8:	08000223 	.word	0x08000223
+ 80000dc:	08000223 	.word	0x08000223
+ 80000e0:	08000223 	.word	0x08000223
+ 80000e4:	08000223 	.word	0x08000223
+ 80000e8:	08000223 	.word	0x08000223
+ 80000ec:	08000223 	.word	0x08000223
+ 80000f0:	08000223 	.word	0x08000223
+ 80000f4:	08000223 	.word	0x08000223
+ 80000f8:	08000223 	.word	0x08000223
+ 80000fc:	08000223 	.word	0x08000223
+ 8000100:	08000223 	.word	0x08000223
+ 8000104:	08000223 	.word	0x08000223
+ 8000108:	08000223 	.word	0x08000223
+ 800010c:	08000223 	.word	0x08000223
+ 8000110:	08000223 	.word	0x08000223
+ 8000114:	08000223 	.word	0x08000223
+ 8000118:	08000223 	.word	0x08000223
+ 800011c:	08000223 	.word	0x08000223
+ 8000120:	08000223 	.word	0x08000223
+ 8000124:	08000223 	.word	0x08000223
+ 8000128:	08000223 	.word	0x08000223
+ 800012c:	08000223 	.word	0x08000223
+ 8000130:	08000223 	.word	0x08000223
+ 8000134:	08000223 	.word	0x08000223
+ 8000138:	08000223 	.word	0x08000223
+ 800013c:	08000223 	.word	0x08000223
+ 8000140:	08000223 	.word	0x08000223
+ 8000144:	08000223 	.word	0x08000223
+ 8000148:	08000223 	.word	0x08000223
+ 800014c:	08000223 	.word	0x08000223
+ 8000150:	08000223 	.word	0x08000223
+ 8000154:	08000223 	.word	0x08000223
+ 8000158:	08000223 	.word	0x08000223
+ 800015c:	08000223 	.word	0x08000223
+ 8000160:	08000223 	.word	0x08000223
+ 8000164:	08000223 	.word	0x08000223
+ 8000168:	08000223 	.word	0x08000223
+ 800016c:	08000223 	.word	0x08000223
+ 8000170:	08000223 	.word	0x08000223
+ 8000174:	08000223 	.word	0x08000223
+ 8000178:	08000223 	.word	0x08000223
+ 800017c:	08000223 	.word	0x08000223
+ 8000180:	08000223 	.word	0x08000223
+ 8000184:	08000223 	.word	0x08000223
+
+08000188 <_main>:
+///////////////////////////////////////////////////////////////////////////////
+// Main code starts from here
+///////////////////////////////////////////////////////////////////////////////
+_main:
+  	// Enable GPIOA and GPIOC Peripheral Clock (bit 0 and 2 in AHB2ENR register)
+	ldr r6, = RCC_AHB2ENR       // Load peripheral clock reg address to r6
+ 8000188:	4e26      	ldr	r6, [pc, #152]	; (8000224 <ADC3_IRQHandler+0x2>)
+	ldr r5, [r6]                // Read its content to r5
+ 800018a:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x1		            // Set bit 0 to enable GPIOA clock
+ 800018c:	f045 0501 	orr.w	r5, r5, #1
+	str r5, [r6]                // Store result in peripheral clock register
+ 8000190:	6035      	str	r5, [r6, #0]
+
+	// Make GPIOA Pin5 as output pin (bits 1:0 in MODER register)
+	ldr r6, = GPIOA_MODER       // Load GPIOA MODER register address to r6
+ 8000192:	f04f 4690 	mov.w	r6, #1207959552	; 0x48000000
+	ldr r5, [r6]                // Read its content to r5
+ 8000196:	6835      	ldr	r5, [r6, #0]
+	and r5, 0xFFFFF7FF          // Write 01 to bits 11, 10 for P5
+ 8000198:	f425 6500 	bic.w	r5, r5, #2048	; 0x800
+	str r5, [r6]                // Store result in GPIOA MODER register
+ 800019c:	6035      	str	r5, [r6, #0]
+
+	// Enable TIMER2 Controller Clock (bit 0 in APB1ENR1 register)
+	ldr r6, = RCC_APB1ENR1      // Load peripheral clock reg address to r6
+ 800019e:	4e22      	ldr	r6, [pc, #136]	; (8000228 <ADC3_IRQHandler+0x6>)
+	ldr r5, [r6]                // Read its content to r5
+ 80001a0:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x1                 // Set bit 0 to enable APB1ENR1 clock
+ 80001a2:	f045 0501 	orr.w	r5, r5, #1
+	str r5, [r6]                // Store result in peripheral clock register
+ 80001a6:	6035      	str	r5, [r6, #0]
+
+	// Make TIMER2 prescaler register (bits 15:0 in PSC register)
+	ldr r6, = TIM2_PSC          // Load TIM2 PSC register address to r6
+ 80001a8:	4e20      	ldr	r6, [pc, #128]	; (800022c <ADC3_IRQHandler+0xa>)
+	ldr r5, = 0x3E7             // load 999 constant to r5 register
+ 80001aa:	f240 35e7 	movw	r5, #999	; 0x3e7
+	          					// fCK_PSC / (PSC[15:0] + 1) = 4 MHz / n + 1 =  timer clock speed
+	str r5, [r6]                // Store result in TIM2 PSC register
+ 80001ae:	6035      	str	r5, [r6, #0]
+
+	// Make TIMER2 auto-reload register (bits 31:0 in ARR register)
+	ldr r6, = TIM2_ARR          // Load TIM2 ARR register address to r6
+ 80001b0:	4e1f      	ldr	r6, [pc, #124]	; (8000230 <ADC3_IRQHandler+0xe>)
+	ldr r5, [r6]                // Read its content to r5
+ 80001b2:	6835      	ldr	r5, [r6, #0]
+	and r5, 0xFA0             	// Write 4000 ARR = IN_interrpt/T_timer
+ 80001b4:	f405 657a 	and.w	r5, r5, #4000	; 0xfa0
+	str r5, [r6]                // Store result in TIM2 ARR register
+ 80001b8:	6035      	str	r5, [r6, #0]
+
+	// Make TIMER2 interrupt enable register (bits 31:0 in DIER register)
+	ldr r6, = TIM2_DIER         // Load TIM2 DIER register address to r6
+ 80001ba:	4e1e      	ldr	r6, [pc, #120]	; (8000234 <ADC3_IRQHandler+0x12>)
+	ldr r5, [r6]                // Read its content to r5
+ 80001bc:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x1             	// Set bit 0 to update interrupt enable
+ 80001be:	f045 0501 	orr.w	r5, r5, #1
+	str r5, [r6]                // Store result in TIM2 DIER register
+ 80001c2:	6035      	str	r5, [r6, #0]
+
+	ldr r6, = NVIC_ISER0
+ 80001c4:	4e1c      	ldr	r6, [pc, #112]	; (8000238 <ADC3_IRQHandler+0x16>)
+	ldr r5, [r6]
+ 80001c6:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x10000000
+ 80001c8:	f045 5580 	orr.w	r5, r5, #268435456	; 0x10000000
+	str r5, [r6]
+ 80001cc:	6035      	str	r5, [r6, #0]
+
+	ldr r6, = NVIC_IPR7
+ 80001ce:	4e1b      	ldr	r6, [pc, #108]	; (800023c <ADC3_IRQHandler+0x1a>)
+	ldr r5, [r6]
+ 80001d0:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x10
+ 80001d2:	f045 0510 	orr.w	r5, r5, #16
+	str r5, [r6]
+ 80001d6:	6035      	str	r5, [r6, #0]
+
+	// Make TIMER2 enable register (bits 15:0 in CR1 register)
+	ldr r6, = TIM2_CR1          // Load TIM2 CR1 register address to r6
+ 80001d8:	f04f 4680 	mov.w	r6, #1073741824	; 0x40000000
+	ldr r5, [r6]                // Read its content to r5
+ 80001dc:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x1             	// Set bit 0 to enable timer
+ 80001de:	f045 0501 	orr.w	r5, r5, #1
+	str r5, [r6]                // Store result in TIM2 CR1 register
+ 80001e2:	6035      	str	r5, [r6, #0]
+
+	CPSIE i						// Enable Global Interrupt
+ 80001e4:	b662      	cpsie	i
+
+080001e6 <loop>:
+
+loop:
+	b loop
+ 80001e6:	e7fe      	b.n	80001e6 <loop>
+
+080001e8 <BusFault_Handler>:
+NMI_Handler:
+HardFault_Handler:
+MemManage_Handler:
+BusFault_Handler:
+UsageFault_Handler:
+        add r0, 1
+ 80001e8:	f100 0001 	add.w	r0, r0, #1
+        add r1, 1
+ 80001ec:	f101 0101 	add.w	r1, r1, #1
+        b _dummy
+ 80001f0:	e7fa      	b.n	80001e8 <BusFault_Handler>
+
+080001f2 <ADC1_2_IRQHandler>:
+TIM1_UP_TIM16_IRQHandler:    		/* TIM1 Update/TIM16 global interrupts                                 */
+TIM1_TRG_COM_TIM17_IRQHandler:		/* TIM1 Trigger and Commutation interrupts and TIM17 global interrupt  */
+TIM1_CC_IRQHandler:          		/* TIM1 Capture Compare interrupt                                      */
+TIM2_IRQHandler:             		/* TIM2 global interrupt                                               */
+
+	ldr r6, = TIM2_CNT
+ 80001f2:	4e13      	ldr	r6, [pc, #76]	; (8000240 <ADC3_IRQHandler+0x1e>)
+	ldr r5, [r6]
+ 80001f4:	6835      	ldr	r5, [r6, #0]
+	cmp r5, 0x7D0
+ 80001f6:	f5b5 6ffa 	cmp.w	r5, #2000	; 0x7d0
+	beq	int
+ 80001fa:	d005      	beq.n	8000208 <int>
+	ldr r6, = GPIOA_ODR         	// Load GPIOA output data register
+ 80001fc:	4e11      	ldr	r6, [pc, #68]	; (8000244 <ADC3_IRQHandler+0x22>)
+	ldr r5, [r6]                	// Read its content to r5
+ 80001fe:	6835      	ldr	r5, [r6, #0]
+	and r5, 0x0000              	// write 1 to pin 5
+ 8000200:	f005 0500 	and.w	r5, r5, #0
+	str r5, [r6]                	// Store result in GPIOA output data register
+ 8000204:	6035      	str	r5, [r6, #0]
+	bx lr
+ 8000206:	4770      	bx	lr
+
+08000208 <int>:
+
+int:
+	ldr r6, = GPIOA_ODR         	// Load GPIOA output data register
+ 8000208:	4e0e      	ldr	r6, [pc, #56]	; (8000244 <ADC3_IRQHandler+0x22>)
+	ldr r5, [r6]                	// Read its content to r5
+ 800020a:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x0020              	// write 1 to pin 5
+ 800020c:	f045 0520 	orr.w	r5, r5, #32
+	str r5, [r6]                	// Store result in GPIOA output data register
+ 8000210:	6035      	str	r5, [r6, #0]
+
+	ldr r7, = TIM2_SR
+ 8000212:	4f0d      	ldr	r7, [pc, #52]	; (8000248 <ADC3_IRQHandler+0x26>)
+	ldr r8, [r7]
+ 8000214:	f8d7 8000 	ldr.w	r8, [r7]
+	and r8, 0xFE
+ 8000218:	f008 08fe 	and.w	r8, r8, #254	; 0xfe
+	str r8, [r7]					//Clear any pending event on SR
+ 800021c:	f8c7 8000 	str.w	r8, [r7]
+
+	bx lr
+ 8000220:	4770      	bx	lr
+
+08000222 <ADC3_IRQHandler>:
+ 8000222:	0000      	.short	0x0000
+	ldr r6, = RCC_AHB2ENR       // Load peripheral clock reg address to r6
+ 8000224:	4002104c 	.word	0x4002104c
+	ldr r6, = RCC_APB1ENR1      // Load peripheral clock reg address to r6
+ 8000228:	40021058 	.word	0x40021058
+	ldr r6, = TIM2_PSC          // Load TIM2 PSC register address to r6
+ 800022c:	40000028 	.word	0x40000028
+	ldr r6, = TIM2_ARR          // Load TIM2 ARR register address to r6
+ 8000230:	4000002c 	.word	0x4000002c
+	ldr r6, = TIM2_DIER         // Load TIM2 DIER register address to r6
+ 8000234:	4000000c 	.word	0x4000000c
+	ldr r6, = NVIC_ISER0
+ 8000238:	e000e100 	.word	0xe000e100
+	ldr r6, = NVIC_IPR7
+ 800023c:	e000e41c 	.word	0xe000e41c
+	ldr r6, = TIM2_CNT
+ 8000240:	40000024 	.word	0x40000024
+	ldr r6, = GPIOA_ODR         	// Load GPIOA output data register
+ 8000244:	48000014 	.word	0x48000014
+	ldr r7, = TIM2_SR
+ 8000248:	40000010 	.word	0x40000010
