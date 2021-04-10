@@ -1,0 +1,9 @@
+core_cm4.h:1688:22:__NVIC_EnableIRQ	16	static
+core_cm4.h:1816:22:__NVIC_SetPriority	16	static
+main.c:39:6:TIM2_IRQHandler	4	static
+main.c:50:6:EXTI15_10_IRQHandler	4	static
+main.c:60:5:main	8	static
+main.c:79:6:GPIO_init	4	static
+main.c:90:6:Ext_init	8	static
+main.c:104:6:TIMER_init	8	static
+main.c:117:6:elevator	24	static
