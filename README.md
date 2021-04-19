@@ -9,5 +9,5 @@ Listado de ejemplos
 + Guía 4 Timers (s y c++):Guía y ejemplo para usar los Timers de la tarjeta para hacer que un led parpadee en intervalos de tiempo constante, el ejemplo y guía estan disponibles en Ensamblador y C++.
 + Guía 5 PWM (s y c++): Guía y ejemplo para implementar un PWM usando el Timer de la tarjeta para controlar el brillo de un led usando un botón, combinando Timer e interrupción externa, el ejemplo y guía estan disponibles en Ensamblador y C++.
 + Guía 6 Semáforo: Guía y ejemplo para implementar una máquina de estados de un semáforo vehicular y un semáforo peatonal, este ejemplo y guía están disponibles en C++.
-+ Guía 7  
++ Guía 7 Elevador: Guía y ejemplo para implementar una máquina de estados de un elevador controlado por un solo botón, este ejemplo y guía están disponibles en C++. 
 
