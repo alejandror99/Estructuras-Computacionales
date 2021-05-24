@@ -11,4 +11,6 @@ Todos los ejemplos fueron creados para la tarjeta STM32L476.
 + Guía 5 PWM (s y c++): Guía y ejemplo para implementar un PWM usando el Timer de la tarjeta para controlar el brillo de un led usando un botón, combinando Timer e interrupción externa, el ejemplo y guía estan disponibles en Ensamblador y C++.
 + Guía 6 Semáforo: Guía y ejemplo para implementar una máquina de estados de un semáforo vehicular y un semáforo peatonal, este ejemplo y guía están disponibles en C++.
 + Guía 7 Elevador: Guía y ejemplo para implementar una máquina de estados de un elevador controlado por un solo botón, este ejemplo y guía están disponibles en C++. 
-
++ Guía 9 Morse: Guía y ejemplo para comunicación entre usuario y máquinas a través de código Morse, usando un botón de la tarjeta de desarrollo el usario puede enviar puntos y lineas al microcontrolador dependiendo del tiempo que permanezca presionado el botón. Este ejercicios está disponible en C++.
++ Guía 10 ADC (s): Guía y ejemplo para implementación de convertidor análogo a digital, permite convertir señales de voltaje en un pin de la tarjeta de desarrollo en un valor númerico que puede ser usado por el microcontrolador. Este ejemplo y guía esta disponible en Ensamblador.
++ Guía 11 Control Iluminación (Asignatura: Sistemas en tiempo real): Guía y ejemplo de una máquina de estados finitos, creada originalmente para la materia Sistemas en tiempo real, explica paso a paso la creación de una máquina de estados para un ejercicio simple de control de iluminación usando Timers y PWM.
