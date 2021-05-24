@@ -1,0 +1,205 @@
+
+ADC_assembly.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000b8  08000000  08000000  00010000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  20000000  080000b8  00020000  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  20000000  080000b8  00020000  2**0
+                  ALLOC
+  3 .ARM.attributes 00000021  00000000  00000000  00020000  2**0
+                  CONTENTS, READONLY
+  4 .debug_line   00000081  00000000  00000000  00020021  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000026  00000000  00000000  000200a2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000014  00000000  00000000  000200c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_aranges 00000020  00000000  00000000  000200e0  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000057  00000000  00000000  00020100  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+08000000 <_main-0x8>:
+ 8000000:	20018000 	.word	0x20018000
+ 8000004:	08000009 	.word	0x08000009
+
+08000008 <_main>:
+///////////////////////////////////////////////////////////////////////////////
+// Main code starts from here
+///////////////////////////////////////////////////////////////////////////////
+_main:
+  	// Enable GPIOA & ADC Peripheral Clock (bit 0 & 13 in AHB2ENR register)
+	ldr r6, = RCC_AHB2ENR       // Load peripheral clock reg address to r6
+ 8000008:	4e22      	ldr	r6, [pc, #136]	; (8000094 <eos+0x1a>)
+	ldr r5, = 0x2001            // Set bit 0 to enable GPIOA clock and bit 13 ADC clock enable
+ 800000a:	f242 0501 	movw	r5, #8193	; 0x2001
+	str r5, [r6]                // Store result in peripheral clock register
+ 800000e:	6035      	str	r5, [r6, #0]
+
+	// Enable ADC Clock (bit 29 & 28 in CCIPR register)
+	ldr r6, = RCC_CCIPR         // Load peripheral clock reg address to r6
+ 8000010:	4e21      	ldr	r6, [pc, #132]	; (8000098 <eos+0x1e>)
+	ldr r5, [r6]                // Read its content to r5
+ 8000012:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x30000000          // Set bit 29 & 28 to enable system clock as ADC clock
+ 8000014:	f045 5540 	orr.w	r5, r5, #805306368	; 0x30000000
+	str r5, [r6]                // Store result in peripheral clock register
+ 8000018:	6035      	str	r5, [r6, #0]
+
+	// Make GPIOA Pin1 as analog pin (bits 3:2 in MODER register)
+	ldr r6, = GPIOA_MODER       // Load GPIOA MODER register address to r6
+ 800001a:	f04f 4690 	mov.w	r6, #1207959552	; 0x48000000
+	ldr r5, [r6]                // Read its content to r5
+ 800001e:	6835      	ldr	r5, [r6, #0]
+	and r5, 0xFFFFFFFF          // Write 11 to bits 3, 2 for P1
+ 8000020:	f005 35ff 	and.w	r5, r5, #4294967295
+	str r5, [r6]                // Store result in GPIOA MODER register
+ 8000024:	6035      	str	r5, [r6, #0]
+
+	// Make GPIOA Pin1 as analog switch pin (bits 3:2 in ASCR register)
+	ldr r6, = GPIOA_ASCR        // Load GPIOA ASCR register address to r6
+ 8000026:	4e1d      	ldr	r6, [pc, #116]	; (800009c <eos+0x22>)
+	ldr r5, [r6]                // Read its content to r5
+ 8000028:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x00000002          // Write 10 to bit 1 for P1
+ 800002a:	f045 0502 	orr.w	r5, r5, #2
+	str r5, [r6]                // Store result in GPIOA ASCR register
+ 800002e:	6035      	str	r5, [r6, #0]
+
+	// Enable ADC1 voltage regulator (bit 28 in CR register)
+	ldr r6, = ADC1_CR           // Load peripheral clock reg address to r6
+ 8000030:	4e1b      	ldr	r6, [pc, #108]	; (80000a0 <eos+0x26>)
+	ldr r5, = 0x10000000         // Set bit 1 to enable ADVREGEN
+ 8000032:	f04f 5580 	mov.w	r5, #268435456	; 0x10000000
+	str r5, [r6]                // Store result in peripheral clock register
+ 8000036:	6035      	str	r5, [r6, #0]
+
+	// Set regular secuence chanel ADC1 (bit 10:6 in SQ1 register)
+	ldr r6, = ADC1_SQR1         // Load peripheral clock reg address to r6
+ 8000038:	4e1a      	ldr	r6, [pc, #104]	; (80000a4 <eos+0x2a>)
+	ldr r5, [r6]                // Read its content to r5
+ 800003a:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x180               // Set bit 8:7 to enable CH6
+ 800003c:	f445 75c0 	orr.w	r5, r5, #384	; 0x180
+	str r5, [r6]                // Store result in peripheral clock register
+ 8000040:	6035      	str	r5, [r6, #0]
+
+	// Set sample time ADC1 CH6 (bit 20:18 in SMP6 register)
+	ldr r6, = ADC1_SMPR1        // Load peripheral clock reg address to r6
+ 8000042:	4e19      	ldr	r6, [pc, #100]	; (80000a8 <eos+0x2e>)
+	ldr r5, [r6]                // Read its content to r5
+ 8000044:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x001C0000          // Set 640.5 ADC clock cycles
+ 8000046:	f445 15e0 	orr.w	r5, r5, #1835008	; 0x1c0000
+	str r5, [r6]                // Store result in peripheral clock register
+ 800004a:	6035      	str	r5, [r6, #0]
+
+	// Enable ADC (bit 0 in ADEN register)
+	ldr r6, = ADC1_CR           // Load peripheral clock reg address to r6
+ 800004c:	4e14      	ldr	r6, [pc, #80]	; (80000a0 <eos+0x26>)
+	ldr r5, [r6]                // Read its content to r5
+ 800004e:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x1                 // Set bit 1 to enable ADC
+ 8000050:	f045 0501 	orr.w	r5, r5, #1
+	str r5, [r6]                // Store result in peripheral clock register
+ 8000054:	6035      	str	r5, [r6, #0]
+
+	// wait time while ADC initialize
+	ldr r4, = DELAY			    // Load 800000 ticks to r4
+ 8000056:	4c15      	ldr	r4, [pc, #84]	; (80000ac <eos+0x32>)
+
+08000058 <delay1>:
+delay1:
+	sub r4, r4, #1				// Subtract data content in r4 less 1
+ 8000058:	f1a4 0401 	sub.w	r4, r4, #1
+	cmp r4, #0					// Compare data content in r4 is 0
+ 800005c:	2c00      	cmp	r4, #0
+ 	bne delay1					// branch instruction: jump to lazo 1 if r4 is different to 0 else go to next instruction
+ 800005e:	d1fb      	bne.n	8000058 <delay1>
+
+08000060 <loop>:
+
+
+loop:
+
+	// ADC START
+	ldr r6, = ADC1_CR           // Load reg address to r6
+ 8000060:	4e0f      	ldr	r6, [pc, #60]	; (80000a0 <eos+0x26>)
+	ldr r5, [r6]                // Read its content to r5
+ 8000062:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x4                 // Set bit 1 to enable ADSTART
+ 8000064:	f045 0504 	orr.w	r5, r5, #4
+	str r5, [r6]                // Store result in peripheral clock register
+ 8000068:	6035      	str	r5, [r6, #0]
+
+0800006a <eoc>:
+
+	// ADC wait end of conversion
+eoc:
+	ldr r6, = ADC1_ISR          // Load reg address to r6
+ 800006a:	4e11      	ldr	r6, [pc, #68]	; (80000b0 <eos+0x36>)
+	ldr r5, [r6]                // Read its content to r5
+ 800006c:	6835      	ldr	r5, [r6, #0]
+	and r5, 0x4
+ 800006e:	f005 0504 	and.w	r5, r5, #4
+	cmp r5, #4                  // Compare data content in r4 is 4
+ 8000072:	2d04      	cmp	r5, #4
+	bne eoc                     // brach while conversion finish
+ 8000074:	d1f9      	bne.n	800006a <eoc>
+
+	ldr r6, = ADC1_DR           // Load reg address to r6
+ 8000076:	4e0f      	ldr	r6, [pc, #60]	; (80000b4 <eos+0x3a>)
+	ldr r5, [r6]                // Read its content to r5
+ 8000078:	6835      	ldr	r5, [r6, #0]
+
+0800007a <eos>:
+
+	// ADC wait end of sequence is cleared
+eos:
+	ldr r6, = ADC1_ISR          // Load reg address to r6
+ 800007a:	4e0d      	ldr	r6, [pc, #52]	; (80000b0 <eos+0x36>)
+	ldr r5, [r6]                // Read its content to r5
+ 800007c:	6835      	ldr	r5, [r6, #0]
+	and r5, 0x8
+ 800007e:	f005 0508 	and.w	r5, r5, #8
+	cmp r5, #8                  // Compare data content in r4 is 8
+ 8000082:	2d08      	cmp	r5, #8
+	bne eos                     // brach while conversion finish
+ 8000084:	d1f9      	bne.n	800007a <eos>
+
+	// set sequence bit
+	ldr r6, = ADC1_ISR          // Load reg address to r6
+ 8000086:	4e0a      	ldr	r6, [pc, #40]	; (80000b0 <eos+0x36>)
+	ldr r5, [r6]                // Read its content to r5
+ 8000088:	6835      	ldr	r5, [r6, #0]
+	orr r5, 0x8                 // Set bit 3 to enable EOS
+ 800008a:	f045 0508 	orr.w	r5, r5, #8
+	str r5, [r6]                // Store result in register
+ 800008e:	6035      	str	r5, [r6, #0]
+
+	b loop                      // Jump to loop
+ 8000090:	e7e6      	b.n	8000060 <loop>
+ 8000092:	0000      	.short	0x0000
+	ldr r6, = RCC_AHB2ENR       // Load peripheral clock reg address to r6
+ 8000094:	4002104c 	.word	0x4002104c
+	ldr r6, = RCC_CCIPR         // Load peripheral clock reg address to r6
+ 8000098:	40021088 	.word	0x40021088
+	ldr r6, = GPIOA_ASCR        // Load GPIOA ASCR register address to r6
+ 800009c:	4800002c 	.word	0x4800002c
+	ldr r6, = ADC1_CR           // Load peripheral clock reg address to r6
+ 80000a0:	50040008 	.word	0x50040008
+	ldr r6, = ADC1_SQR1         // Load peripheral clock reg address to r6
+ 80000a4:	50040030 	.word	0x50040030
+	ldr r6, = ADC1_SMPR1        // Load peripheral clock reg address to r6
+ 80000a8:	50040014 	.word	0x50040014
+	ldr r4, = DELAY			    // Load 800000 ticks to r4
+ 80000ac:	000c3500 	.word	0x000c3500
+	ldr r6, = ADC1_ISR          // Load reg address to r6
+ 80000b0:	50040000 	.word	0x50040000
+	ldr r6, = ADC1_DR           // Load reg address to r6
+ 80000b4:	50040040 	.word	0x50040040
